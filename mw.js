@@ -5,7 +5,6 @@ process.addListener("uncaughtException",(e) => console.error("MiniWedge >> " + e
 process.addListener("unhandledRejection",(r) => console.error("MiniWedge >> " + r));
 console.log("MiniWedge >> Starting...");
 require("http").createServer((req,res) => {
-    console.log(require("./mw.json").src+req.url);
     if(Object.keys(require("./mw.json").paths).includes(req.url)) {
         res.writeHead(200,{"Content-Type":"text/html"});
         res.end(require("fs").readFileSync(require("./mw.json").paths[req.url]));
