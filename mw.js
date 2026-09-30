@@ -16,7 +16,7 @@ require("http").createServer((req,res) => {
                 case "css": return "text/css";
                 case "png": return "image/png";
                 case "gif": return "image/gif";
-                case "svg": return "image/svg";
+                case "svg": return "image/svg+xml";
                 case "jpeg": case "jpg": return "image/jpg";
                 case "ttf": return "font/ttf";
                 default: return "text/plain";
