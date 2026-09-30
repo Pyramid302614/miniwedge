@@ -8,7 +8,7 @@ require("http").createServer((req,res) => {
     if(Object.keys(require("./mw.json").paths).includes(req.url)) {
         res.writeHead(200,{"Content-Type":"text/html"});
         res.end(require("fs").readFileSync(require("./mw.json").paths[req.url]));
-    } else if(require("fs").existsSync(require("./mw.json").src+req.url)) {
+    } else if(require("fs").existsSync(require("./mw.json").src+"/"+req.url.slice(1))) {
         res.writeHead(200,{"Content-Type":((ext) => {
             switch(ext) {
                 case "html": return "text/html";
