@@ -8,7 +8,7 @@ require("http").createServer((req,res) => {
     if(Object.keys(require("./mw.json").paths).includes(req.url)) {
         res.writeHead(200,{"Content-Type":"text/html"});
         res.end(require("fs").readFileSync(require("./mw.json").paths[req.url]));
-    } else if(require("fs").existsSync(require("./mw.json").src+"/"+req.url.slice(1))) {
+    } else if(require("fs").existsSync(require("./mw.json").src+req.url.slice(1))) {
         res.writeHead(200,{"Content-Type":((ext) => {
             switch(ext) {
                 case "html": return "text/html";
@@ -21,6 +21,6 @@ require("http").createServer((req,res) => {
                 case "ttf": return "font/ttf";
                 default: return "text/plain";
             }})(require("node:path").extname(req.url))});
-        res.end(require("fs").readFileSync(require("./mw.json").src+req.url));
+        res.end(require("fs").readFileSync(require("./mw.json").src+req.url.slice(1)));
     }
 }).listen(require("./mw.json").port,() => console.log("MiniWedge >> Ready when you are"));
